@@ -1,2 +1,2 @@
-# tudo
-A ToDo list developed with Milligram, Svelte and Back4App as the back-end service.
+# "Tudo" List
+A to-do task list system developed with Milligram, Svelte and Back4App as the back-end service.

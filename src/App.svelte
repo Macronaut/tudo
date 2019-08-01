@@ -1,12 +1,15 @@
 <script>
 	import { Router, Link, Route } from "svelte-routing";
 	import Login from "./routes/Login.svelte";
-	import List from "./routes/List.svelte";
+  import List from "./routes/List.svelte";
+  import { onMount } from 'svelte';
 
-  	export let url = "";
-
-	Parse.serverURL = 'https://parseapi.back4app.com';
-	Parse.initialize('rkwXxU6sEJx1oCm1xh9U8XcJ7q5B9hyru3s0Z8LY', 'ItgUzDXip0Aujpbo1Vjf6c3hBjUTaQQ5BCesmTnw');
+    export let url = "";
+        
+    onMount(() => {
+      Parse.serverURL = 'https://parseapi.back4app.com';
+      Parse.initialize('rkwXxU6sEJx1oCm1xh9U8XcJ7q5B9hyru3s0Z8LY', 'ItgUzDXip0Aujpbo1Vjf6c3hBjUTaQQ5BCesmTnw');
+    })
 </script>
 
 <style>

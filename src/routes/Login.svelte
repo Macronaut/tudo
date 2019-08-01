@@ -29,6 +29,7 @@
 </style>
 
 <script>
+    import { fade } from 'svelte/transition';
     import { onMount } from 'svelte';
     
     let isDesktop,
@@ -40,10 +41,25 @@
     onMount(() => { isDesktop = window.innerWidth > 1024 })
 
     const checkInput = $param_event => {
-        console.log("type :: " + $param_event.type);
+        console.log("param_event :: " + $param_event.type);
         let inputName = $param_event.currentTarget.name;
-        if(!hasTouched[inputName]) hasTouched[inputName] = true;
-        hasError[inputName] = !inputGroup[inputName] ? "Por favor insira seus dados adequadamente." : inputGroup[inputName].length < 3 ? "Por favor, preencha este campo com no mínimo 3 caracteres" : "";
+        if(!hasTouched[inputName] && $param_event.type === "change") hasTouched[inputName] = true;
+        hasError[inputName] = !inputGroup[inputName] ? "* Dado obrigatório" : inputGroup[inputName].length < 3 ? "* Mínimo de 3 caracteres" : "";
+    }
+
+    const checkLogin = $param_event => {
+        const Account = Parse.Object.extend('Account');
+        const query = new Parse.Query(Account);
+        
+        query.find().then((results) => {
+        // You can use the "get" method to get the value of an attribute
+        // Ex: response.get("<ATTRIBUTE_NAME>")
+        if (typeof document !== 'undefined') document.write(`Account found: ${JSON.stringify(results)}`);
+        console.log('Account found', results);
+        }, (error) => {
+        if (typeof document !== 'undefined') document.write(`Error while fetching Account: ${JSON.stringify(error)}`);
+        console.error('Error while fetching Account', error);
+        });
     }
 </script>
 
@@ -58,38 +74,48 @@
                             <span class="text-white text-bold">Usuário</span>
                             <div class="row">
                                 <div class="column column-margin">
-                                    <input name="login" class="input-field text-white" on:change="{ checkInput }" bind:value={ inputGroup.login } type="text" placeholder="Insira seu nome de usuário aqui">
-                                    { #if hasError.login && hasTouched.login } <span class="text-white"> { hasError.login } </span> { /if }
+                                    <input name="login" class="input-field text-white" on:keyup="{ checkInput }" on:change="{ checkInput }" bind:value={ inputGroup.login } type="text" placeholder="Nome de usuário">
                                 </div>
                             </div>
+                            
+                            { #if hasError.login && hasTouched.login }
+                                <div class="row" transition:fade>
+                                    <div class="column">
+                                        <span class="text-white text-shadow"> { hasError.login } </span>
+                                    </div>
+                                </div>
+                            { /if }
+
                             <span class="text-white text-bold">Senha</span>
                             <div class="row">
                                 <div class="column column-flex column-margin">
                                     
                                     {#if isPassword}
-                                        <input name="password" class="input-field text-white" on:change="{ checkInput }" bind:value={ inputGroup.password } type="password" placeholder="Insira sua senha aqui">
+                                        <input name="password" class="input-field text-white" on:keyup="{ checkInput }" on:change="{ checkInput }" bind:value={ inputGroup.password } type="password" placeholder="Senha">
                                     {:else}
-                                        <input name="password" class="input-field text-white" on:change="{ checkInput }" bind:value={ inputGroup.password } type="text" placeholder="Insira sua senha aqui">
+                                        <input name="password" class="input-field text-white" on:keyup="{ checkInput }" on:change="{ checkInput }" bind:value={ inputGroup.password } type="text" placeholder="Senha">
                                     {/if}
 
                                     <span on:click="{() => { isPassword = !isPassword }}" class="text-white icon fas { isPassword ? 'fa-eye-slash' :  'fa-eye' }"></span>
                                 </div>
                             </div>
+                            
                             { #if hasError.password && hasTouched.password }
-                                <div class="row">
+                                <div class="row" transition:fade>
                                     <div class="column">
-                                        <p class="text-white"> { hasError.password } </p>
+                                        <span class="text-white text-shadow"> { hasError.password } </span>
                                     </div>
                                 </div>
                             { /if }
+                            
                             <div class="row">
                                 <div class="column text-center">
-                                    <a class="button button-primary { !inputGroup.password || !inputGroup.login || hasError.login || hasError.password ? 'button-disabled' : '' }"><span class="fas fa-sign-in-alt"></span> entrar</a>
+                                    <a on:click={ checkLogin } class="button button-primary { !inputGroup.password || !inputGroup.login || hasError.login || hasError.password ? 'button-disabled' : '' }"><span class="fas fa-sign-in-alt"></span> entrar</a>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="column">
-                                    <span class="text-white">OBS:. Caso seu usuário não exista, o mesmo criado automaticamente.</span>
+                                    <span class="text-white">OBS:. Caso seu usuário não exista, o mesmo será criado automaticamente.</span>
                                 </div>
                             </div>
                         </div>

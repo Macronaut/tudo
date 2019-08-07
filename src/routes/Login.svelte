@@ -61,6 +61,10 @@
         console.error('Error while fetching Account', error);
         });
     }
+
+    const checkSignup = $param_event => {
+
+    }
 </script>
 
 <section class="component-login">
@@ -111,6 +115,7 @@
                             <div class="row">
                                 <div class="column text-center">
                                     <a on:click={ checkLogin } class="button button-primary { !inputGroup.password || !inputGroup.login || hasError.login || hasError.password ? 'button-disabled' : '' }"><span class="fas fa-sign-in-alt"></span> entrar</a>
+                                    <a on:click={ checkSignup } class="button button-secondary { !inputGroup.password || !inputGroup.login || hasError.login || hasError.password ? 'button-disabled' : '' }"><span class="fas fa-user-plus"></span> criar</a>
                                 </div>
                             </div>
                             <div class="row">

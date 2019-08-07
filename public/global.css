@@ -32,3 +32,21 @@ body { background-color: #252525 }
     color: #414141;
     cursor: default;    
 }
+
+.button.button-secondary {
+    border: 0.1rem solid rgb(255, 100, 100);
+    background-color: rgb(255, 100, 100);
+    margin: 10px 0;
+}
+
+.button.button-secondary:hover {
+    border: 0.1rem solid rgb(150, 50, 50);
+    background-color: rgb(150, 50, 50);
+}
+
+.button.button-secondary.button-disabled {
+    border: 0.1rem solid #252525;
+    background-color: #252525;
+    color: #414141;
+    cursor: default;    
+}

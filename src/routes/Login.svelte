@@ -1,5 +1,5 @@
 <style>
-    .component-login .container-login {
+    /* .component-login .container-login {
         -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.25);
         -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.25);
         box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.25);
@@ -25,7 +25,7 @@
         cursor: pointer;
         margin: 0 10px;
         width: 27px;
-    }
+    } */
 </style>
 
 <script>
@@ -34,8 +34,8 @@
     
     let isDesktop,
     hasTouched = { login: false, password: false },
-    hasError = { login: '', password: '' },
     inputGroup = { login: '', password: '' },
+    hasError = { login: '', password: '' },
     isPassword = true;
 
     onMount(() => { isDesktop = window.innerWidth > 1024 })
@@ -68,7 +68,7 @@
 </script>
 
 <section class="component-login">
-    <div class="row">
+    <!-- <div class="row">
         <div class="column { isDesktop ? 'column-50' : 'column-90' } column-center">
             <div class="container-login">
                 <div class="form-login">
@@ -128,5 +128,53 @@
                 </div>
             </div>
         </div>
+    </div> -->
+    <div class="columns is-centered is-mobile">
+        <div class="column is-7-desktop is-11-mobile">
+            <div class="box">
+                
+                <div class="columns is-centered is-mobile">
+                    <div class="column">
+                        <p class="is-size-2 has-text-centered has-text-weight-bold">Tu<span class="has-text-danger">Do</span></p>
+                    </div>                
+                </div>
+
+                <div class="columns is-centered is-mobile">
+                    <div class="column is-11">
+
+                    <div class="columns is-centered">
+                        <div class="column is-8-desktop">
+                            <div class="field">
+                                <p class="control has-icons-left has-icons-right">
+                                    <input class="input" type="email" placeholder="Conta">
+                                    <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <p class="control has-icons-left">
+                                    <input class="input" type="password" placeholder="Senha">
+                                    <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <p class="control has-text-centered">
+                                    <a class="button is-success" disabled="{ !inputGroup.password || !inputGroup.login || hasError.login || hasError.password }">
+                                        <span>Login</span>
+                                        <span class="icon is-small"><i class="fas fa-sign-in-alt"></i></span>
+                                    </a>
+                                    <a class="button is-link" disabled="{ !inputGroup.password || !inputGroup.login || hasError.login || hasError.password }">
+                                        <span>Criar</span>
+                                        <span class="icon is-small"><i class="fas fa-user-plus"></i></span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>        
     </div>
 </section>

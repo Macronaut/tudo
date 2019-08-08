@@ -144,15 +144,15 @@
 
                     <div class="columns is-centered">
                         <div class="column is-8-desktop">
-                            <div class="field">
+                            <div class="field">                                
                                 <p class="control has-icons-left has-icons-right">
-                                    <input class="input" type="email" placeholder="Conta">
+                                    <input class="input" type="email" placeholder="Conta" bind:value={ inputGroup.login }>
                                     <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
                                 </p>
                             </div>
                             <div class="field">
                                 <p class="control has-icons-left">
-                                    <input class="input" type="password" placeholder="Senha">
+                                    <input class="input" type="password" placeholder="Senha" bind:value={ inputGroup.password }>
                                     <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
                                 </p>
                             </div>

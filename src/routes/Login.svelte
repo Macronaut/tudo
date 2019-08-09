@@ -142,34 +142,52 @@
                 <div class="columns is-centered is-mobile">
                     <div class="column is-11">
 
-                    <div class="columns is-centered">
-                        <div class="column is-8-desktop">
-                            <div class="field">                                
-                                <p class="control has-icons-left has-icons-right">
-                                    <input class="input" type="email" placeholder="Conta" bind:value={ inputGroup.login }>
-                                    <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
-                                </p>
-                            </div>
-                            <div class="field">
-                                <p class="control has-icons-left">
-                                    <input class="input" type="password" placeholder="Senha" bind:value={ inputGroup.password }>
-                                    <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
-                                </p>
-                            </div>
-                            <div class="field">
-                                <p class="control has-text-centered">
-                                    <a class="button is-success" disabled="{ !inputGroup.password || !inputGroup.login || hasError.login || hasError.password }">
-                                        <span>Login</span>
-                                        <span class="icon is-small"><i class="fas fa-sign-in-alt"></i></span>
-                                    </a>
-                                    <a class="button is-link" disabled="{ !inputGroup.password || !inputGroup.login || hasError.login || hasError.password }">
-                                        <span>Criar</span>
-                                        <span class="icon is-small"><i class="fas fa-user-plus"></i></span>
-                                    </a>
-                                </p>
+                        <div class="columns is-centered">
+                            <div class="column is-8-desktop">
+                                <div class="field">                                
+                                    <p class="control has-icons-left has-icons-right">
+                                        <input class="input" type="email" placeholder="Usuário" bind:value={ inputGroup.login }>
+                                        <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
+                                    </p>
+                                    {#if hasError.login} <p> </p> {/if}
+                                </div>
+                                <div class="field">                                
+                                    <p class="control has-icons-left">
+                                        <input class="input" type="password" placeholder="Senha" bind:value={ inputGroup.password }>
+                                        <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
+                                    </p>
+                                </div>
+                                <div class="field">
+                                    <p class="control has-text-centered">
+                                        { #if !inputGroup.password || !inputGroup.login || hasError.login || hasError.password }
+                                            <a class="button is-success" disabled>
+                                                <span>Login</span>
+                                                <span class="icon is-small"><i class="fas fa-sign-in-alt"></i></span>
+                                            </a>
+                                            <a class="button is-link" disabled>
+                                                <span>Criar</span>
+                                                <span class="icon is-small"><i class="fas fa-user-plus"></i></span>
+                                            </a>
+                                        { :else }
+                                            <a class="button is-success">
+                                                <span>Login</span>
+                                                <span class="icon is-small"><i class="fas fa-sign-in-alt"></i></span>
+                                            </a>
+                                            <a class="button is-link">
+                                                <span>Criar</span>
+                                                <span class="icon is-small"><i class="fas fa-user-plus"></i></span>
+                                            </a>
+                                        { /if }                                    
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        
+                        <div class="columns is-centered">
+                            <div class="column is-8-desktop has-text-justified">                                
+                                <p>Após o preenchimento dos dados, pressione <span class="has-text-weight-bold">Login</span> para entrar em uma conta existente e <span class="has-text-weight-bold">Criar</span> para gerar uma nova.</p>                                
+                            </div>
+                        </div>
 
                     </div>
                 </div>

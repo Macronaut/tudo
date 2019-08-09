@@ -128,7 +128,7 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div> -->    
     <div class="columns is-centered is-mobile">
         <div class="column is-7-desktop is-11-mobile">
             <div class="box">
@@ -146,17 +146,18 @@
                             <div class="column is-8-desktop">
                                 <div class="field">                                
                                     <p class="control has-icons-left has-icons-right">
-                                        <input class="input" type="email" placeholder="Usuário" bind:value={ inputGroup.login }>
+                                        <input on:keyup="{ checkInput }" on:change="{ checkInput }" class="input" type="text" placeholder="Usuário" bind:value={ inputGroup.login }>
                                         <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
                                     </p>
-                                    {#if hasError.login} <p> </p> {/if}
                                 </div>
+                                { #if hasError.login && hasTouched.login } <p class="has-text-danger"> { hasError.login } </p> {/if}
                                 <div class="field">                                
                                     <p class="control has-icons-left">
-                                        <input class="input" type="password" placeholder="Senha" bind:value={ inputGroup.password }>
+                                        <input on:keyup="{ checkInput }" on:change="{ checkInput }" class="input" type="password" placeholder="Senha" bind:value={ inputGroup.password }>
                                         <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
                                     </p>
                                 </div>
+                                { #if hasError.password && hasTouched.password } <p class="has-text-danger"> { hasError.password } </p> {/if}
                                 <div class="field">
                                     <p class="control has-text-centered">
                                         { #if !inputGroup.password || !inputGroup.login || hasError.login || hasError.password }

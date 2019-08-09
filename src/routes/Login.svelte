@@ -42,9 +42,11 @@
 
     const checkInput = $param_event => {
         console.log("param_event :: " + $param_event.type);
-        let inputName = $param_event.currentTarget.name;
+        let inputName = $param_event.currentTarget.name;        
         if(!hasTouched[inputName] && $param_event.type === "change") hasTouched[inputName] = true;
         hasError[inputName] = !inputGroup[inputName] ? "* Dado obrigatório" : inputGroup[inputName].length < 3 ? "* Mínimo de 3 caracteres" : "";
+        console.log("inputGroup[inputName] :: " + inputGroup[inputName]);
+        console.log("hasError[inputName] :: " + hasError[inputName]);
     }
 
     const checkLogin = $param_event => {
@@ -131,7 +133,7 @@
     </div> -->    
     <div class="columns is-centered is-mobile">
         <div class="column is-7-desktop is-11-mobile">
-            <div class="box">
+            <div class="box">                
                 
                 <div class="columns is-centered is-mobile">
                     <div class="column">
@@ -146,18 +148,30 @@
                             <div class="column is-8-desktop">
                                 <div class="field">                                
                                     <p class="control has-icons-left has-icons-right">
-                                        <input on:keyup="{ checkInput }" on:change="{ checkInput }" class="input" type="text" placeholder="Usuário" bind:value={ inputGroup.login }>
+                                        <input name="login" on:keyup="{ checkInput }" on:change="{ checkInput }" class="input" type="text" placeholder="Usuário" bind:value={ inputGroup.login }>
                                         <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
                                     </p>
-                                </div>
-                                { #if hasError.login && hasTouched.login } <p class="has-text-danger"> { hasError.login } </p> {/if}
+                                </div>                                
+                                { #if hasError.login && hasTouched.login }
+                                    <div class="columns">
+                                        <div class="column">
+                                            <p class="has-text-danger has-text-weight-bold"> { hasError.login } </p>
+                                        </div>
+                                    </div>
+                                {/if}
                                 <div class="field">                                
                                     <p class="control has-icons-left">
-                                        <input on:keyup="{ checkInput }" on:change="{ checkInput }" class="input" type="password" placeholder="Senha" bind:value={ inputGroup.password }>
+                                        <input name="password" on:keyup="{ checkInput }" on:change="{ checkInput }" class="input" type="password" placeholder="Senha" bind:value={ inputGroup.password }>
                                         <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
                                     </p>
                                 </div>
-                                { #if hasError.password && hasTouched.password } <p class="has-text-danger"> { hasError.password } </p> {/if}
+                                { #if hasError.password && hasTouched.password }
+                                    <div class="columns">
+                                        <div class="column">
+                                            <p class="has-text-danger has-text-weight-bold"> { hasError.password } </p>
+                                        </div>
+                                    </div>
+                                {/if}
                                 <div class="field">
                                     <p class="control has-text-centered">
                                         { #if !inputGroup.password || !inputGroup.login || hasError.login || hasError.password }
